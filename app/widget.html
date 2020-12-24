@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDePXA2LUkFnOt2_YrITq43JqqQDzLXAmQ"></script>
+  <script type="text/javascript" src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+
+  <link rel="stylesheet" src="styles/main.css" />
+  <script type="text/javascript" src="js/app.js"></script>
+  
+</head>
+
+<body>
+  <div id="map" style="height: 100vh; min-height: 350px; width: 100%"></div>
+</body>
+
+<script>
+  $(document).ready(async () => {
+    let creator = await ZOHO.CREATOR.init();
+    let query = ZOHO.CREATOR.UTIL.getQueryParams();
+    window.App.init(query, document.getElementById("map"));
+  });
+</script>
+
+</html>

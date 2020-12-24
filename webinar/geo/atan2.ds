@@ -1,0 +1,58 @@
+float geo.atan2(float y, float x)
+{
+	/*
+	PI_FLOAT = 3.141592653589793;
+	PIBY2_FLOAT = 1.570796326794897;
+	if(input.x == 0.0)
+	{
+		if(input.y > 0.0)
+		{
+			atan2 = PIBY2_FLOAT;
+		}
+		else if(input.y == 0.0)
+		{
+			atan2 = 0.0;
+		}
+		else
+		{
+			atan2 = 0 - PIBY2_FLOAT;
+		}
+	}
+	else
+	{
+		z = y / x;
+		if(abs(z) < 1.0)
+		{
+			atan = z / (1.0 + 0.28 * z * z);
+			if(input.x < 0.0)
+			{
+				if(input.y < 0.0)
+				{
+					atan2 = atan - PI_FLOAT;
+				}
+				else
+				{
+					atan2 = atan + PI_FLOAT;
+				}
+			}
+			else
+			{
+				atan2 = atan;
+			}
+		}
+		else
+		{
+			atan = PIBY2_FLOAT - z / (z * z + 0.28);
+			if(input.y < 0)
+			{
+				atan2 = atan - PI_FLOAT;
+			}
+			else
+			{
+				atan2 = atan;
+			}
+		}
+	}
+	*/
+	return if(x == 0.0,if(y >= 0.0,1.570796326794897,0.0 - 1.570796326794897),if(x > 0,atan(y / x),atan(y / x) + if(y >= 0.0,3.141592653589793,0.0 - 3.141592653589793)));
+}

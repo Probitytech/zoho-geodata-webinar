@@ -1,0 +1,5 @@
+
+	rec = Visit[ID == input.record_id.toLong()];
+	lnglat = rec.Apartment.longitude1 + "," + rec.Apartment.latitude1;
+    overlay = "pin-s-circle+B40404(" + lnglat + ")";
+	url = "https://api.mapbox.com/styles/v1/vatsenko/ckivvxiop289p19o7t789m3zk/static/" + overlay + "/" + lnglat + ",8,0,50/1200x350@2x?access_token=" + thisapp.mapbox.token();

@@ -1,0 +1,10 @@
+map geo.bearing(float Lat, Float Lng, float angle_rad, float Distance)
+{
+	R = 6372795.0 / 1.609;
+	d = Distance / R;
+	PI = 3.14159265358979;
+	pLat = asin(sin(Lat) * cos(d) + cos(Lat) * sin(d) * cos(angle_rad));
+	pLng = ((Lng + thisapp.geo.atan2(sin(angle_rad) * sin(d) * cos(Lat),cos(d) - sin(Lat) * sin(pLat))) * 180) / PI;
+	pLat = (pLat * 180) / PI;
+	return {"lat":round(pLat,5),"long":round(pLng,5)};
+}

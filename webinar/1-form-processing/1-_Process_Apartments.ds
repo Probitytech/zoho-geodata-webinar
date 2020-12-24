@@ -1,0 +1,13 @@
+void _Process_Apartments()
+{
+	for each  r in Apartment[ID != 0]
+	{
+		r.Address.address_line_1=r.street;
+		r.Address.district_city=r.city;
+		r.Address.postal_Code=r.zip;
+		r.Address.state_province=r.state;
+		r.Address.country="United States";
+		url = r.Url.replaceAll("^.*href\s*=\s*\"([^\"]*)\".*$","$1");
+		r.Image="<img src= \"" + url + "\" border=\"0\"></img>";
+	}
+}

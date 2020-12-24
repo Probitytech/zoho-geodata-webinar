@@ -1,0 +1,14 @@
+    rec = Visit[ID == input.record_id.toLong()];
+	lnglat = rec.Apartment.longitude1 + "," + rec.Apartment.latitude1;
+    //
+    dist = ifnull(distance,"20").toLong() * 1000;
+    br = thisapp.geo.square_bounds(rec.Apartment.latitude1,rec.Apartment.longitude1,dist);
+    points = Apartment[latitude1 != null && longitude1 != null && latitude1 >= br.get("latmin") && latitude1 <= br.get("latmax") && longitude1 >= br.get("longmin") && longitude1 <= br.get("longmax")] range from 1 to 200;
+	overlay = "";
+    for each  point in points
+	{
+		overlay = overlay + "pin-s-circle+0B4C5F(" + point.longitude1 + "," + point.latitude1 + "),";
+	}
+    //
+    overlay = overlay + "pin-s-circle+B40404(" + lnglat + ")";
+	url = "https://api.mapbox.com/styles/v1/vatsenko/ckivvxiop289p19o7t789m3zk/static/" + overlay + "/" + lnglat + ",8,0,50/1200x350@2x?access_token=" + thisapp.mapbox.token();

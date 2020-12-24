@@ -1,0 +1,14 @@
+void _Zoho_Geocoding()
+{
+	rec = Apartment[ID != 0] range from 201 to 300;
+	for each  r in rec
+	{
+		addr = "" + r.Address;
+		response = zoho.map.geoCode(addr);
+		if(response.get("status") == "success")
+		{
+			info r.lat + " > " + response.get("latitude");
+			info r.lng + " > " + response.get("longitude");
+		}
+	}
+}
