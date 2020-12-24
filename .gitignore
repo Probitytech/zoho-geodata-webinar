@@ -105,3 +105,5 @@ dist
 
 dist/
 server/
+*.pem
+package-lock.json
