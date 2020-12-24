@@ -107,3 +107,4 @@ dist/
 server/
 *.pem
 package-lock.json
+.DS_Store
