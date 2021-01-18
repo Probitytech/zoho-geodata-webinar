@@ -1,8 +1,0 @@
-void _Fill_geodata()
-{
-	for each  r in Apartment[ID != 0]
-	{
-		r.Address.latitude=r.lat;
-		r.Address.longitude=r.lng;
-	}
-}

@@ -1,5 +1,11 @@
 map geo.square_bounds(float lat1, float lon1, int Distance)
 {
+	/*******************************************************************************************
+    * 				
+    *       Get the square boundaries away on Distance from given point
+	* 		using Reverse haversine formula
+	*		Center - lat1, lon1
+	*/
 	PI = 3.14159265358979;
 	//
 	Lat = lat1 * PI / 180.0;

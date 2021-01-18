@@ -3,18 +3,19 @@
     * 			
     *			this code generates map 1200x350 for retina screed (double density)
     *			validate distance in the loop and put the points within the range on map
-    *           and draw circle with given radius
+    *          and draw circle with given radius
+    *          also added scale for different ranges
     */
 	
 	dist = ifnull(distance,"20").toLong() * 1000;
 	rec = Visit[ID == input.record_id.toLong()];
 	lnglat = rec.Apartment.longitude1 + "," + rec.Apartment.latitude1;
 	br = thisapp.geo.square_bounds(rec.Apartment.latitude1,rec.Apartment.longitude1,dist);
-// 		SW = br.get("longmin") + "," + br.get("latmax");
-// 		NW = br.get("longmin") + "," + br.get("latmin");
-// 		NE = br.get("longmax") + "," + br.get("latmin");
-// 		SE = br.get("longmax") + "," + br.get("latmax");
-// 		ls = {"[" + SW + "]","[" + NW + "]","[" + NE + "]","[" + SE + "]","[" + SW + "]"};
+	// 	SW = br.get("longmin") + "," + br.get("latmax");
+	// 	NW = br.get("longmin") + "," + br.get("latmin");
+	// 	NE = br.get("longmax") + "," + br.get("latmin");
+	// 	SE = br.get("longmax") + "," + br.get("latmax");
+	// 	ls = {"[" + SW + "]","[" + NW + "]","[" + NE + "]","[" + SE + "]","[" + SW + "]"};
 	ls = thisapp.geo.regular_polygon(rec.Apartment.latitude1,rec.Apartment.longitude1,dist,60);
 	geojson = "{\"type\":\"Feature\",\"properties\":{\"fill\": \"#FA5858\",\"fill-opacity\": 0.3,\"stroke-width\": 1,\"stroke-opacity\": 0.3},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[" + ls + "]]}}";
 	overlay = "geojson(" + encodeUrl(geojson).replaceAll("\+","%20") + ")";
@@ -28,7 +29,8 @@
 		}
 	}
 	overlay = overlay + ",pin-s-circle+B40404(" + lnglat + ")";
-	url = "https://api.mapbox.com/styles/v1/vatsenko/ckivvxiop289p19o7t789m3zk/static/" + overlay + "/" + lnglat + ",8,0,50/1200x350@2x?access_token=" + thisapp.mapbox.token();
+	SCALE = {"200":"5","100":"6","50":"7","20":"8","10":"9","5":"10"};
+	url = "https://api.mapbox.com/styles/v1/vatsenko/ckivvxiop289p19o7t789m3zk/static/" + overlay + "/" + lnglat + "," + SCALE.get(distance) + ",0,50/1200x350@2x?access_token=" + thisapp.mapbox.token();
 	%>
 <!-- BEGIN -->
 <style>

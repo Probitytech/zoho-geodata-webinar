@@ -1,4 +1,3 @@
-html,
 body{
   margin: 0;
   padding: 0;
@@ -6,31 +5,46 @@ body{
   width: 100vw; 
   height: 100vh;
 }
-.marker-content img{
-    max-width:140px;
-    max-height:140px;
-    margin:0 auto;
+#map{
+  width: 100%;
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+  min-height: 350px; 
 }
+
+.marker-content{
+  max-width:160px;
+}
+
 .marker-content .title{
-    font-size:2em;
-    font-weight:bold;
-    text-align:center;
-    padding:2px;
+  font-size:1em;
+  font-weight:bold;
+  text-align:center;
+  padding:4px 2px;
 }
+
+.marker-content img{
+  max-width:120px;
+  max-height:120px;
+  display: block; 
+  margin: 0 auto;
+  border:1px solid #eeecec;
+  border-radius: 4px;
+}
+
 .marker-content .visit-link{
-  margin:4px auto;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-	background-color:#f9f9f9;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:block;
-	cursor:pointer;
-	color:#666666;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
+  margin:6px auto; 
+  box-shadow:inset 0px 1px 0px 0px #ffffff;                  
+  background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); 
+  background-color:#f9f9f9;       
+  border-radius:6px; 
+  border:1px solid #dcdcdc; 
+  display:block; 
+  cursor:pointer; color:#444;                  
+  font-size:14px; 
+  font-weight:bold; 
+  padding:6px 24px; 
+  text-decoration:none;               
+  text-shadow:0px 1px 0px #ffffff;
 }

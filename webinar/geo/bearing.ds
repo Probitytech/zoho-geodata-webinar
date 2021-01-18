@@ -1,5 +1,13 @@
 map geo.bearing(float Lat, Float Lng, float angle_rad, float Distance)
 {
+	/*******************************************************************************************
+    * 				
+    *          			Reverse haversine formula
+	*		Returns the coordinates of point away on Distance 
+	* 		from given coordinates and with azimuth angle_rad
+	* 		expect angle_rad as radians 
+	* 		(0 - North, PI/2 - East, PI - South, 3*PI/2 - West)
+    */
 	R = 6372795.0 / 1.609;
 	d = Distance / R;
 	PI = 3.14159265358979;

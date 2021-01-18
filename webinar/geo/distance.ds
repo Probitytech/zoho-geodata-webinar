@@ -1,14 +1,19 @@
 float geo.distance(float src_Lat, float src_Long, float dst_Lat, float dst_Long)
 {
-	/*
-	pi = 3.14159265358979;
+	/*******************************************************************************************
+    * 				
+    *          			Haversine formula
+	*		Returns the distance between two points in miles (short version)
+	* 		
+
+	PI = 3.14159265358979;
 	// radius in meters
-	rad = 6372795.0;
-	//R = 6372795.0/ 1.609;
-	lat1 = ifnull(src_Lat,50.515721) * pi / 180.0;
-	lat2 = ifnull(dst_Lat,50.393762) * pi / 180.0;
-	long1 = ifnull(src_Long,30.362062) * pi / 180.0;
-	long2 = ifnull(dst_Long,30.677884) * pi / 180.0;
+	rad = 6371000.0;
+	//R = 6371000.0/ 1.609;
+	lat1 = src_Lat * PI / 180.0;
+	lat2 = dst_Lat * PI / 180.0;
+	long1 = src_Long * PI / 180.0;
+	long2 = dst_Long * PI / 180.0;
 	//
 	cl1 = cos(lat1);
 	cl2 = cos(lat2);
@@ -24,8 +29,9 @@ float geo.distance(float src_Lat, float src_Long, float dst_Lat, float dst_Long)
 	//info "x,y:" + x + ", " + y;
 	ad = thisapp.atan2(y,x);
 	dist = ad * rad;
-	
+	return dist
 	*/
+
 	PI = 3.14159265358979;
 	lat1 = src_Lat * PI / 180.0;
 	lat2 = dst_Lat * PI / 180.0;

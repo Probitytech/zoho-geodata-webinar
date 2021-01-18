@@ -1,17 +1,18 @@
-void _Google_Geocoding()
+string _Google_Geocoding()
 {
-	rec = Apartment[ID != 0] range from 1 to 20;
+	rec = Apartment[ID != 0] range from 1 to 100;
+	counter = 0;
 	for each  r in rec
 	{
-		addr = "" + r.Address;
-		url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeUrl(addr) + "&key=" + thisapp.google.apikey();
+
+		url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeUrl(r.Address.toString()) + "&key=" + thisapp.google.apikey();
 		response = getUrl(url);
 		if(response.get("status") == "OK")
 		{
 			result = response.get("results").toJSONList().get(0);
 			info result.get("geometry").get("location_type");
-			info r.lat + " > " + result.get("geometry").get("location").get("lat");
-			info r.lng + " > " + result.get("geometry").get("location").get("lng");
+			counter = counter + 1;
 		}
 	}
+	return "Geocoded: "+ counter;
 }

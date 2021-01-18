@@ -2,10 +2,11 @@
 
     class App {
         constructor() {
-            const href = ""+window.location.href;
-            console.log(href);
-            this.owner = "malthinae.com";
-            this.application = "test";
+            const href = (window.location != window.parent.location) ? document.referrer : document.location.href;
+            const parts = href.split('//').pop().split('/');
+            this.owner = parts[1];
+            this.application = parts[2];
+            //
             this.visitReportName = "All_Visits";
             this.visitFormName = "Visit";
             this.apartmentReportName = "All_Apartments";
@@ -43,16 +44,10 @@
                     const link = `https://creatorapp.zoho.com/${this.owner}/${this.application}/#Form:${this.visitFormName}?Apartment=${p.ID}&zc_LoadIn=dialog`;
 
                     const infowindow = new google.maps.InfoWindow({
-                        content: `<div style="max-width:160px;">
-                                    <div style="font-size:1em; font-weight:bold; text-align:center; padding:2px;">${p.Title}</div>
-                                    <img src="${p.Image}" 
-                                        style="max-width:120px;max-height:120px;display: block; margin: 0 auto;">
-                                    </img>
-                                    <a style="margin:6px auto; box-shadow:inset 0px 1px 0px 0px #ffffff; 
-                                        background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); background-color:#f9f9f9; 
-                                        border-radius:6px; border:1px solid #dcdcdc; display:block; cursor:pointer; color:#444; 
-                                        font-family:Arial; font-size:14px; font-weight:bold; padding:6px 24px; text-decoration:none; 
-                                        text-shadow:0px 1px 0px #ffffff;" href="${link}" target="_top">Schedule Visit</a>
+                        content: `<div class="marker-content">
+                                    <div class="title">${p.Title}</div>
+                                    <img src="${p.Image}"></img>
+                                    <a class="visit-link" href="${link}" target="_top">Schedule Visit</a>
                                   </div>`,
                     });
 

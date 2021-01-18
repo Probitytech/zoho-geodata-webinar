@@ -1,5 +1,16 @@
 list geo.regular_polygon(float lat1, float lon1, int Distance, int vertices_num)
 {
+	/*******************************************************************************************
+    * 				
+    *       Draw regular poligon 
+	*		Center - lat1, lon1
+	* 		Radius - Distance
+	* 		Number of corners - vertices_num
+	* 		for the circle - we use 36+ points (depends on radius)
+	* 		NOTE: This function returns array of arrays with longitude on first place and latitude on second
+	* 		for google and others api - change the order of params
+	*/
+
 	PI = 3.14159265358979;
 	//
 	Lat = lat1 * PI / 180.0;
