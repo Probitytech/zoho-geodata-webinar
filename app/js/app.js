@@ -77,6 +77,26 @@
 
         }
 
+        async getCenter(record_id) {
+
+            let record = await ZOHO.CREATOR.API.getRecordById({
+                reportName: this.visitReportName,
+                id: record_id
+            })
+            let center = await ZOHO.CREATOR.API.getRecordById({
+                reportName: this.apartmentReportName,
+                id: record.data.Apartment.ID
+            })
+            
+            return {
+                ID: center.data.ID,
+                Image: center.data.Image,
+                Title: center.data.Title,
+                latitude: parseFloat(center.data.latitude1),
+                longitude: parseFloat(center.data.longitude1),
+            };
+        }
+
         async getPoints(lat, long, distance) {
             let sq = this.square_bounds(lat, long, distance);
             console.log("Square bounds:", sq);
@@ -99,26 +119,6 @@
                 return (this.distance(lat, long, p.latitude, p.longitude) <= distance)
             });
 
-        }
-
-        async getCenter(record_id) {
-
-            let record = await ZOHO.CREATOR.API.getRecordById({
-                reportName: this.visitReportName,
-                id: record_id
-            })
-            let center = await ZOHO.CREATOR.API.getRecordById({
-                reportName: this.apartmentReportName,
-                id: record.data.Apartment.ID
-            })
-            
-            return {
-                ID: center.data.ID,
-                Image: center.data.Image,
-                Title: center.data.Title,
-                latitude: parseFloat(center.data.latitude1),
-                longitude: parseFloat(center.data.longitude1),
-            };
         }
 
         distance = (src_Lat, src_Long, dst_Lat, dst_Long) => {
