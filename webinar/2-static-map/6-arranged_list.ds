@@ -1,28 +1,42 @@
 <%{
-	dist = ifnull(distance,"20").toLong() * 1000;
-	rec = Visit[ID == input.record_id.toLong()];
-	br = thisapp.geo.square_bounds(rec.Apartment.latitude1,rec.Apartment.longitude1,dist);
-	points = Apartment[latitude1 != null && longitude1 != null && latitude1 >= br.get("latmin") && latitude1 <= br.get("latmax") && longitude1 >= br.get("longmin") && longitude1 <= br.get("longmax")] range from 1 to 200;
-	//
-	distance_index = Collection();
-	for each  point in points
-	{
-		range = thisapp.geo.distance(rec.Apartment.latitude1,rec.Apartment.longitude1,point.latitude1,point.longitude1);
-		if(range <= dist)
-		{
-			distance_index.insert("" + point.ID:leftpad("" + round(range,1),10).replaceAll(" ","0"));
-		}
-	}
-	distance_index.sort();
 	html = "";
-	for each  point_id in distance_index.keys()
+	if(ifnull(record_id,"") != "")
 	{
-		p = Apartment[ID == point_id.toLong()];
-		html = html + "<a id='" + point_id + "' target='_self' class='point-line' href='#Report:View_Apartment?ID=" + point_id + "&zc_Header=false&zc_Search=false&zc_Paging=false&zc_MoreAction=false&zc_AddRec=false&zc_Footer=false&zc_LoadIn=dialog'><div class='apartment-name'>" + p.Title + "</div><div class='distance'>" + distance_index.get(point_id).toDecimal() + "</div></a>";
+		dist = ifnull(distance,"20").toLong() * 1000;
+		rec = Visit[ID == input.record_id.toLong()];
+		br = thisapp.geo.square_bounds(rec.Apartment.latitude1,rec.Apartment.longitude1,dist);
+		points = Apartment[latitude1 != null && longitude1 != null && latitude1 >= br.get("latmin") && latitude1 <= br.get("latmax") && longitude1 >= br.get("longmin") && longitude1 <= br.get("longmax")] range from 1 to 200;
+		//
+		distance_index = Collection();
+		for each  point in points
+		{
+			range = thisapp.geo.distance(rec.Apartment.latitude1,rec.Apartment.longitude1,point.latitude1,point.longitude1);
+			if(range <= dist)
+			{
+				distance_index.insert("" + point.ID:leftpad("" + round(range,1),10).replaceAll(" ","0"));
+			}
+		}
+		distance_index.sort();
+		html = "";
+		for each  point_id in distance_index.keys()
+		{
+			p = Apartment[ID == point_id.toLong()];
+			html = html + "<div class='link-wrapper'><a id='" + point_id + "' target='_self' class='point-line' href='#Form:Visit?Apartment=" + point_id + "&zc_LoadIn=dialog'><div class='apartment-name'>" + p.Title + "</div><div class='distance'>" + round(distance_index.get(point_id).toDecimal() / 1000,1) + "mi.</div></a></div>";
+		}
 	}
 	%>
 <!-- BEGIN -->
 <style>
+	.point-list{
+		max-width:1200px;
+		margin:20px auto 10px;
+	}
+	.link-wrapper{
+		float: left;
+  		width: 50%;
+		
+	}
+
 	.apartment-name{
 		flex-grow: 2;
 		width:60%;
@@ -39,6 +53,10 @@
 		flex-direction:row;
 		max-width:1200px;
 		margin:0px auto;
+		padding: 2px 25px;
+	}
+	.point-line:hover{
+		background:#eaeaef;
 	}
 </style>
 <div class="point-list">

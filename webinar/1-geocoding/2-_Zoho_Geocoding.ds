@@ -1,0 +1,21 @@
+string geocoding.Zoho_Geocoding()
+{
+	rec = Apartment[ID != 0] range from 1 to 100;
+	counter = 0;
+	for each  r in rec
+	{
+		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+		response = zoho.map.geoCode(address);
+		info address;
+		if(response.get("status") == "success")
+		{
+			info "OK";
+			counter = counter + 1;
+		}
+		else
+		{
+			info "FAULT";
+		}
+	}
+	return "Geocoded: " + counter;
+}

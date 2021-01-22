@@ -1,0 +1,27 @@
+string geocoding.OpenStreet_Geocoding()
+{
+	/*******************************************************************************************
+	 *									OpenStreetMap Geocoding 
+	 *			http://developer.mapquest.com/documentation/open/geocoding-api/address/get/
+	 */
+	rec = Apartment[ID != 0] range from 1 to 100;
+	counter = 0;
+	for each  r in rec
+	{
+		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+		url = "https://open.mapquestapi.com/geocoding/v1/address?outFormat=json&thumbMaps=false&location=" + encodeUrl(address) + "&key=" + thisapp.mapquest.apikey();
+		response = getUrl(url);
+		info address;
+		if(response.getJSON("info").getJSON("statuscode") == 0)
+		{
+			results = response.getJSON("results").toJSONList();
+			result = results.get(0);
+			info result.getJSON("locations").getJSON("geocodeQuality") + "-" + result.getJSON("locations").getJSON("geocodeQualityCode");
+			if(result.getJSON("locations").getJSON("geocodeQuality") == "STREET" || result.getJSON("locations").getJSON("geocodeQuality") = "ADDRESS" || result.getJSON("locations").getJSON("geocodeQuality") = "POINT")
+			{
+				counter = counter + 1;
+			}
+		}
+	}
+	return "Geocoded: " + counter;
+}

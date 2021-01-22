@@ -1,0 +1,26 @@
+string geocoding.Google_Geocoding()
+{
+	/*******************************************************************************************
+	 *									GOOGLE API Geocoding 
+	 *					https://developers.google.com/maps/documentation/geocoding/start
+	 */
+	rec = Apartment[ID != 0] range from 1 to 100;
+	counter = 0;
+	for each  r in rec
+	{
+		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+		url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeUrl(address) + "&key=" + thisapp.google.apikey();
+		response = getUrl(url);
+		info address;
+		if(response.get("status") == "OK")
+		{
+			result = response.get("results").toJSONList().get(0);
+			info result.get("geometry").get("location_type");
+			if(result.get("geometry").get("location_type") == "ROOFTOP" || result.get("geometry").get("location_type") == "RANGE_INTERPOLATED")
+			{
+				counter = counter + 1;
+			}
+		}
+	}
+	return "Geocoded: " + counter;
+}
