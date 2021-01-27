@@ -7,9 +7,6 @@
             this.owner = parts[1];
             this.application = parts[2];
             //
-            this.visitReportName = "All_Visits";
-            this.visitFormName = "Visit";
-            this.apartmentReportName = "All_Apartments";
 
             this.center = undefined;
             this.map = undefined;
@@ -33,7 +30,6 @@
 
                 const bounds = new google.maps.LatLngBounds();
 
-
                 this.points.forEach(p => {
                     let LatLng = new google.maps.LatLng(p.latitude, p.longitude);
                     let marker = new google.maps.Marker({
@@ -41,7 +37,7 @@
                         map: map,
                     });
 
-                    const link = `https://creatorapp.zoho.com/${this.owner}/${this.application}/#Form:${this.visitFormName}?Apartment=${p.ID}&zc_LoadIn=dialog`;
+                    const link = `https://creatorapp.zoho.com/${this.owner}/${this.application}/#Form:Visit?Apartment=${p.ID}&zc_LoadIn=dialog`;
 
                     const infowindow = new google.maps.InfoWindow({
                         content: `<div class="marker-content">
@@ -80,11 +76,11 @@
         async getCenter(record_id) {
 
             let record = await ZOHO.CREATOR.API.getRecordById({
-                reportName: this.visitReportName,
+                reportName: "All_Visits",
                 id: record_id
             })
             let center = await ZOHO.CREATOR.API.getRecordById({
-                reportName: this.apartmentReportName,
+                reportName: "All_Apartments",
                 id: record.data.Apartment.ID
             })
             
@@ -101,7 +97,7 @@
             let sq = this.square_bounds(lat, long, distance);
             console.log("Square bounds:", sq);
             let points = await ZOHO.CREATOR.API.getAllRecords({
-                reportName: this.apartmentReportName,
+                reportName: "All_Apartments",
                 criteria: `(latitude1 >= ${sq.latmin} && latitude1 <= ${sq.latmax} && longitude1 >= ${sq.longmin} && longitude1 <= ${sq.longmax})`,
                 page: 1,
                 pageSize: 200
