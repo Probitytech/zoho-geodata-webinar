@@ -4,8 +4,9 @@ string geocoding.OpenStreet_Geocoding()
 	 *									OpenStreetMap Geocoding 
 	 *			http://developer.mapquest.com/documentation/open/geocoding-api/address/get/
 	 */
-	rec = Apartment[ID != 0] range from 1 to 100;
+	rec = Apartment[ID != 0] range from 1 to 30;
 	counter = 0;
+	now = floor(zoho.currenttime.toLong() / 1000);
 	for each  r in rec
 	{
 		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
@@ -23,5 +24,6 @@ string geocoding.OpenStreet_Geocoding()
 			}
 		}
 	}
-	return "Geocoded: " + counter;
+	elapsed_sec = floor(zoho.currenttime.toLong() / 1000) - now;
+	return "Geocoded: " + counter + " in " + elapsed_sec + " sec.";
 }

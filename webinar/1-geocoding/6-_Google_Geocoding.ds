@@ -4,8 +4,9 @@ string geocoding.Google_Geocoding()
 	 *									GOOGLE API Geocoding 
 	 *					https://developers.google.com/maps/documentation/geocoding/start
 	 */
-	rec = Apartment[ID != 0] range from 1 to 100;
+	rec = Apartment[ID != 0] range from 1 to 30;
 	counter = 0;
+	now = floor(zoho.currenttime.toLong() / 1000);
 	for each  r in rec
 	{
 		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
@@ -16,11 +17,12 @@ string geocoding.Google_Geocoding()
 		{
 			result = response.get("results").toJSONList().get(0);
 			info result.get("geometry").get("location_type");
-			if(result.get("geometry").get("location_type") == "ROOFTOP" || result.get("geometry").get("location_type") == "RANGE_INTERPOLATED")
+			if(result.get("geometry").get("location_type") == "ROOFTOP" || result.get("geometry").get("location_type") == "RANGE_INTERPOLATED" || result.get("geometry").get("location_type") == "GEOMETRIC_CENTER")
 			{
 				counter = counter + 1;
 			}
 		}
 	}
-	return "Geocoded: " + counter;
+	elapsed_sec = floor(zoho.currenttime.toLong() / 1000) - now;
+	return "Geocoded: " + counter + " in " + elapsed_sec + " sec.";
 }
