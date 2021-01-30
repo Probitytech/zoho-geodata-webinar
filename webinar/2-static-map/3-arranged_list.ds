@@ -2,26 +2,49 @@
 	html = "";
 	if(ifnull(record_id,"") != "")
 	{
-		dist = ifnull(distance,"20").toLong() * 1000;
+		dist = floor(ifnull(distance,"20").toLong() * 1609.0);
 		rec = Visit[ID == input.record_id.toLong()];
-		br = thisapp.geo.square_bounds(rec.Apartment.latitude1,rec.Apartment.longitude1,dist);
+		center = Apartment[ID == rec.Apartment];
+		//
+		// get the square boundaries from center with specified distance
+		br = thisapp.geo.square_bounds(center.latitude1,center.longitude1,dist);
+		//
+		// filter apartments using  square boundaries 
 		points = Apartment[latitude1 != null && longitude1 != null && latitude1 >= br.get("latmin") && latitude1 <= br.get("latmax") && longitude1 >= br.get("longmin") && longitude1 <= br.get("longmax")] range from 1 to 200;
 		//
 		distance_index = Collection();
 		for each  point in points
 		{
-			range = thisapp.geo.distance(rec.Apartment.latitude1,rec.Apartment.longitude1,point.latitude1,point.longitude1);
-			if(range <= dist)
+			//calculate the range for each point
+			range = thisapp.geo.haversine_distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);
+			if(range < dist && point.ID != center.ID)
 			{
-				distance_index.insert("" + point.ID:leftpad("" + round(range,1),10).replaceAll(" ","0"));
+				// put on map only validated points
+				distance_index.insert(point.ID:range);
 			}
 		}
+		/*
+		//			record_id.       : distance
+		{
+				"1581254000005241047": 17908.38,
+				"1581254000005241079": 12295.88,
+				"1581254000005241155": 13564.91,
+				"1581254000005241167": 11995.01,
+				"1581254000005241199": 9415.12,
+				...
+				"1581254000005243747": 16795.64,
+				"1581254000005243907": 22025.39
+		}
+		*/
+		//
+		// Sort by value 
 		distance_index.sort();
 		html = "";
+		// add sorted points on map 
 		for each  point_id in distance_index.keys()
 		{
 			p = Apartment[ID == point_id.toLong()];
-			html = html + "<div class='link-wrapper'><a id='" + point_id + "' target='_self' class='point-line' href='#Form:Visit?Apartment=" + point_id + "&zc_LoadIn=dialog'><div class='apartment-name'>" + p.Title + "</div><div class='distance'>" + round(distance_index.get(point_id).toDecimal() / 1000,1) + "mi.</div></a></div>";
+			html = html + "<div class='link-wrapper'><a id='" + point_id + "' target='_self' class='point-line' href='#Form:Visit?Apartment=" + point_id + "&zc_LoadIn=dialog'><div class='apartment-name'>" + p.Title + "</div><div class='distance'>" + round(distance_index.get(point_id).toDecimal() / 1609,1) + "mi.</div></a></div>";
 		}
 	}
 	%>

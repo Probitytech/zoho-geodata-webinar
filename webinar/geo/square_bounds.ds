@@ -1,20 +1,23 @@
-map geo.square_bounds(float lat1, float lon1, int Distance)
+map geo.square_bounds(float Lat, float Lng, int Distance)
 {
 	/*******************************************************************************************
     * 				
     *       Get the square boundaries away on Distance from given point
 	* 		using Reverse haversine formula
-	*		Center - lat1, lon1
+	*		Center - Lat, Lng
 	*/
-	PI = 3.14159265358979;
-	//
-	Lat = lat1 * PI / 180.0;
-	Lng = lon1 * PI / 180.0;
-	//
 	latmax = thisapp.geo.bearing(Lat,Lng,0,Distance).get("lat");
-	longmax = thisapp.geo.bearing(Lat,Lng,PI / 2,Distance).get("long");
-	latmin = thisapp.geo.bearing(Lat,Lng,PI,Distance).get("lat");
-	longmin = thisapp.geo.bearing(Lat,Lng,3 * PI / 2,Distance).get("long");
+	longmax = thisapp.geo.bearing(Lat,Lng,90,Distance).get("long");
+	latmin = thisapp.geo.bearing(Lat,Lng,180,Distance).get("lat");
+	longmin = thisapp.geo.bearing(Lat,Lng,270,Distance).get("long");
 	//
+	/*
+		{
+			"latmin":30.22225,
+			"latmax":30.80089,
+			"longmin":-97.91657,
+			"longmax":-97.24493
+		}
+	*/
 	return {"latmin":min(round(latmin,5),round(latmax,5)),"latmax":max(round(latmin,5),round(latmax,5)),"longmin":min(round(longmin,5),round(longmax,5)),"longmax":max(round(longmin,5),round(longmax,5))};
 }

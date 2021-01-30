@@ -10,19 +10,14 @@ list geo.regular_polygon(float lat1, float lon1, int Distance, int vertices_num)
 	* 		NOTE: This function returns array of arrays with longitude on first place and latitude on second
 	* 		for google and others api - change the order of params
 	*/
-
-	PI = 3.14159265358979;
-	//
-	Lat = lat1 * PI / 180.0;
-	Lng = lon1 * PI / 180.0;
 	points = List:Map();
 	step = 360 / vertices_num;
 	counter = leftpad("1",vertices_num).replaceAll(" ","0,").toList();
 	circle = List();
 	for each index i in counter
 	{
-		angle_rad = i * step * PI / 180;
-		dest = thisapp.geo.bearing(Lat,Lng,angle_rad,Distance);
+		angle = i * step;
+		dest = thisapp.geo.bearing(lat1,lon1,angle,Distance);
 		circle.add("[" + dest.get("long") + "," + dest.get("lat") + "]");
 	}
 	start_point = circle.get(0);

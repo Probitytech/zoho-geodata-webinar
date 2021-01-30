@@ -1,19 +1,19 @@
-float geo.distance(float src_Lat, float src_Long, float dst_Lat, float dst_Long)
+float geo.haversine_distance(float latitude1, float longitude1, float latitude2, float longitude2)
 {
 	/*******************************************************************************************
     * 				
     *          			Haversine formula
-	*		Returns the distance between two points in miles (short version)
+	*		Returns the distance between two points in kilometers (short version)
 	* 		
-
-	PI = 3.14159265358979;
+	//
+	
+	pi = 3.14159265358979;
 	// radius in meters
 	rad = 6371000.0;
-	//R = 6371000.0/ 1.609;
-	lat1 = src_Lat * PI / 180.0;
-	lat2 = dst_Lat * PI / 180.0;
-	long1 = src_Long * PI / 180.0;
-	long2 = dst_Long * PI / 180.0;
+	lat1 = ifnull(latitude1,50.515721) * pi / 180.0;
+	lat2 = ifnull(latitude2,50.393762) * pi / 180.0;
+	long1 = ifnull(longitude1,30.362062) * pi / 180.0;
+	long2 = ifnull(longitude2,30.677884) * pi / 180.0;
 	//
 	cl1 = cos(lat1);
 	cl2 = cos(lat2);
@@ -29,15 +29,15 @@ float geo.distance(float src_Lat, float src_Long, float dst_Lat, float dst_Long)
 	//info "x,y:" + x + ", " + y;
 	ad = thisapp.atan2(y,x);
 	dist = ad * rad;
-	return dist
+	
 	*/
-
 	PI = 3.14159265358979;
-	lat1 = src_Lat * PI / 180.0;
-	lat2 = dst_Lat * PI / 180.0;
-	long1 = src_Long * PI / 180.0;
-	long2 = dst_Long * PI / 180.0;
+	lat1 = latitude1 * PI / 180.0;
+	lat2 = latitude2 * PI / 180.0;
+	long1 = longitude1 * PI / 180.0;
+	long2 = longitude2 * PI / 180.0;
 	y = sqrt(power(cos(lat2) * sin(long2 - long1),2) + power(cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(long2 - long1),2));
 	x = sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long2 - long1);
-	return thisapp.geo.atan2(y,x) * 6371000.0 / 1.609;
+	// for miles we have to divide result on 1609
+	return thisapp.geo.atan2(y,x) * 6371000.0;
 }

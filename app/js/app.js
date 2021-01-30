@@ -2,7 +2,8 @@
 
     class App {
         constructor() {
-            const href = (window.location != window.parent.location) ? document.referrer : document.location.href;
+            const href = (window.location != window.parent.location) ? 
+                document.referrer : document.location.href;
             const parts = href.split('//').pop().split('/');
             this.owner = parts[1];
             this.application = parts[2];
@@ -20,7 +21,8 @@
                 this.center = await this.getCenter(query.record_id);
                 console.log(this.center);
 
-                this.points = await this.getPoints(this.center.latitude, this.center.longitude, parseInt(query.distance) * 1000)
+                this.points = await this.getPoints(this.center.latitude, this.center.longitude, 
+                    parseInt(query.distance) * 1000)
                 console.log(this.points);             
 
                 const map = new google.maps.Map(mapRef, {

@@ -19,14 +19,14 @@
 		br = thisapp.geo.square_bounds(center.latitude1,center.longitude1,dist);
 		//
 		// Generate the points for the corners
-		SW = br.get("longmin") + "," + br.get("latmax");
-		NW = br.get("longmin") + "," + br.get("latmin");
-		NE = br.get("longmax") + "," + br.get("latmin");
-		SE = br.get("longmax") + "," + br.get("latmax");
-		ls = {"[" + SW + "]","[" + NW + "]","[" + NE + "]","[" + SE + "]","[" + SW + "]"};
+		//SW = br.get("longmin") + "," + br.get("latmax");
+		//NW = br.get("longmin") + "," + br.get("latmin");
+		//NE = br.get("longmax") + "," + br.get("latmin");
+		//SE = br.get("longmax") + "," + br.get("latmax");
+		//ls = {"[" + SW + "]","[" + NW + "]","[" + NE + "]","[" + SE + "]","[" + SW + "]"};
 		//
 		// Generate the points for the circle
-		//ls = thisapp.geo.regular_polygon(center.latitude1,center.longitude1,dist,60);
+		ls = thisapp.geo.regular_polygon(center.latitude1,center.longitude1,dist,60);
 		//
 		// draw polygon with given set of points 
 		geojson = "{\"type\":\"Feature\",\"properties\":{\"fill\": \"#FA5858\",\"fill-opacity\": 0.3,\"stroke-width\": 1,\"stroke-opacity\": 0.3},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[" + ls + "]]}}";
@@ -36,7 +36,9 @@
 		points = Apartment[latitude1 != null && longitude1 != null && latitude1 >= br.get("latmin") && latitude1 <= br.get("latmax") && longitude1 >= br.get("longmin") && longitude1 <= br.get("longmax")] range from 1 to 200;
 		for each  point in points
 		{
-			if(point.ID != center.ID)
+			//calculate the range for each point
+			range = thisapp.geo.haversine_distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);
+			if(range < dist && point.ID != center.ID)
 			{
 				// put on map only validated points
 				overlay = overlay + ",pin-s-circle+0B4C5F(" + point.longitude1 + "," + point.latitude1 + ")";

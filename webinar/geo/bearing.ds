@@ -1,16 +1,19 @@
-map geo.bearing(float Lat, Float Lng, float angle_rad, float Distance)
+map geo.bearing(float lat1, Float lon1, float angle, float Distance)
 {
 	/*******************************************************************************************
     * 				
-    *          			Reverse haversine formula
 	*		Returns the coordinates of point away on Distance 
-	* 		from given coordinates and with azimuth angle_rad
-	* 		expect angle_rad as radians 
-	* 		(0 - North, PI/2 - East, PI - South, 3*PI/2 - West)
+	* 		from given coordinates and with azimuth angle clockwize
+	* 		http://www.edwilliams.org/avform.htm#LL
+	* 		(0 - North, 90 - West, 180 - South, 270 - East)
+	*		expect distance in meters
     */
-	R = 6372795.0 / 1.609;
-	d = Distance / R;
 	PI = 3.14159265358979;
+	angle_rad = 2 * PI * angle / 360;
+	Lat = lat1 * PI / 180.0;
+	Lng = lon1 * PI / 180.0;
+	d = Distance / 6371000.0;
+	//
 	pLat = asin(sin(Lat) * cos(d) + cos(Lat) * sin(d) * cos(angle_rad));
 	pLng = ((Lng + thisapp.geo.atan2(sin(angle_rad) * sin(d) * cos(Lat),cos(d) - sin(Lat) * sin(pLat))) * 180) / PI;
 	pLat = (pLat * 180) / PI;

@@ -1,0 +1,57 @@
+
+string geocoding.Zoho_Geocoding_AI()
+{
+	/*******************************************************************************************
+	 *									Zoho Geocoding 
+	 *						https://www.zoho.com/deluge/help/map-tasks/geocode.html
+	 *					                + Parsing Address
+	 *				 		https://www.zoho.com/deluge/help/ai-tasks/parse-address.html
+	 */
+	rec = Apartment[ID != 0] range from 1 to 100;
+	counter = 0;
+	for each  r in rec
+	{
+		address = r.Address.toString();
+		// 
+		response = zoho.ai.parseAddress(address);
+		/*
+		response = {
+			"data":{
+				"items":[
+					{
+					"country":"us",
+					"road":"state road 33 n",
+					"city":"lakeland",
+					"postcode":"33805",
+					"house_number":"4920",
+					"state":"fl"
+					}
+				]
+			},
+			"message":"OK",
+			"status":200
+		}
+		*/
+		addr = response.get("data").get("items").get(0);
+		//
+		address = addr.get("house_number") + " " + addr.get("road") + ", " + addr.get("city") + ", " + addr.get("state") + ", " + addr.get("postcode") + ", " + addr.get("country");
+		response = zoho.map.geoCode(address);
+		/*
+		response = {
+			"latitude":"29.6278757",
+			"longitude":"-98.4950131",
+			"status":"success"
+		}
+		*/
+		if(response.get("status") == "success")
+		{
+			info "OK";
+			counter = counter + 1;
+		}
+		else
+		{
+			info "FAULT";
+		}
+	}
+	return "Geocoded: " + counter;
+}
