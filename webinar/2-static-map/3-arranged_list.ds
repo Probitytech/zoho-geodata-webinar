@@ -16,7 +16,7 @@
 		for each  point in points
 		{
 			//calculate the range for each point
-			range = thisapp.geo.haversine_distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);
+			range = thisapp.geo.distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);
 			if(range < dist && point.ID != center.ID)
 			{
 				// put on map only validated points

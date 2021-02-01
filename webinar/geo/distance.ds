@@ -1,4 +1,4 @@
-float geo.haversine_distance(float latitude1, float longitude1, float latitude2, float longitude2)
+float geo.distance(float latitude1, float longitude1, float latitude2, float longitude2)
 {
 	/*******************************************************************************************
     * 				
