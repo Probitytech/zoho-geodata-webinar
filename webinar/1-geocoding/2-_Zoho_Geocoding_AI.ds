@@ -1,4 +1,3 @@
-
 string geocoding.Zoho_Geocoding_AI()
 {
 	/*******************************************************************************************
@@ -7,42 +6,38 @@ string geocoding.Zoho_Geocoding_AI()
 	 *					                + Parsing Address
 	 *				 		https://www.zoho.com/deluge/help/ai-tasks/parse-address.html
 	 */
-	rec = Apartment[ID != 0] range from 1 to 100;
+	rec = Apartment[ID != 0] range from 1 to 20;
 	counter = 0;
 	for each  r in rec
 	{
-		address = r.Address.toString();
-		// 
-		response = zoho.ai.parseAddress(address);
+		// parse address
+		response = zoho.ai.parseAddress(r.Address.toString());
 		/*
-		response = {
-			"data":{
-				"items":[
-					{
-					"country":"us",
-					"road":"state road 33 n",
-					"city":"lakeland",
-					"postcode":"33805",
-					"house_number":"4920",
-					"state":"fl"
-					}
-				]
-			},
-			"message":"OK",
-			"status":200
-		}
+			// sample of response:
+			response = {
+				"data":{
+					"items":[
+						{
+						"house_number":"4920",
+						"road":"state road 33 n",
+						"city":"lakeland",
+						"state":"fl",
+						"postcode":"33805",
+						"country":"us",
+						}
+					]
+				},
+				"message":"OK",
+				"status":200
+			}
 		*/
-		addr = response.get("data").get("items").get(0);
 		//
-		address = addr.get("house_number") + " " + addr.get("road") + ", " + addr.get("city") + ", " + addr.get("state") + ", " + addr.get("postcode") + ", " + addr.get("country");
+		// generate friendly name
+		items = response.get("data").get("items").get(0);
+		address = items.get("house_number") + " " + items.get("road") + ", " + items.get("city") + ", " + items.get("state") + ", " + items.get("postcode") + ", " + items.get("country");
+		//
+		// geocode
 		response = zoho.map.geoCode(address);
-		/*
-		response = {
-			"latitude":"29.6278757",
-			"longitude":"-98.4950131",
-			"status":"success"
-		}
-		*/
 		if(response.get("status") == "success")
 		{
 			info "OK";

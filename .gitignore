@@ -103,8 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
+.gitignore
+
 dist/
 server/
 *.pem
 package-lock.json
+package.json
+plugin-manifest.json
 .DS_Store

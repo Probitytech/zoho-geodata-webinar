@@ -1,0 +1,1392 @@
+/*
+ * Author       : malthinae.com
+ * Generated on : 03-Feb-2021 06:12:36 PST
+ * Version      : 1.0
+ */
+ application "MapMe"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Europe/Kiev"
+ 	time format = "24-hr"
+	section Apartments
+	{
+		custom View_Apartment
+		{
+			displayName = "Apartment Cards"
+			show all rows from Apartment    
+			(
+				Title
+				Address 
+	 			(
+	      			displayformat = [address_line_1+""+address_line_2+""+district_city+""+state_province+""+postal_Code+""+country]
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Image
+				longitude1 as "longitude"
+				ID
+				latitude1 as "latitude"
+			)
+			quickview
+			(
+				layout
+				(
+		 			customlayouts
+	     			(
+		 				template
+		 				(
+		 	  				displayname="Card"
+		 	  				content="<panel \n>\n	<pr    		 height = 'fill'\n   		 width = 'fill'\n\n>\n	<pc    		 width = '100%'\n   		 bgColor = '#FFFFFF'\n   		 padding = '20px'\n   		 hAlign = 'left'\n   		 vAlign = 'top'\n\n>\n	<pr    		 height = 'fill'\n   		 width = 'fill'\n\n>\n	<pc    		 width = '25%'\n   		 bgColor = 'transparent'\n   		 padding = '0px'\n   		 hAlign = 'left'\n   		 vAlign = 'top'\n\n>\n	<pr    		 height = 'auto'\n   		 width = 'auto'\n\n>\n	<pc \n>\n	<image    		 color = '#FFFFFF'\n   		 bgColor = 'transparent'\n   		 width = '110px'\n   		 height = '110px'\n   		 type = 'field'\n   		 value = 'Image'\n   		 cornerRadius = '0px'\n\n/>\n\n</pc>\n</pr>\n</pc><pc    		 width = '75%'\n   		 bgColor = 'transparent'\n   		 paddingTop = '0px'\n   		 paddingLeft = '15px'\n   		 paddingRight = '0px'\n   		 paddingBottom = '0px'\n   		 hAlign = 'left'\n   		 vAlign = 'middle'\n\n>\n	<pr    		 height = 'fill'\n   		 width = 'fill'\n\n>\n	<pc    		 width = '100%'\n   		 padding = '0px'\n   		 hAlign = 'left'\n   		 vAlign = 'middle'\n\n>\n	<pr    		 height = 'auto'\n   		 width = 'auto'\n\n>\n	<pc    		 padding = '0px'\n   		 hAlign = 'left'\n\n>\n	<pr \n>\n	<pc \n>\n	<text    		 type = 'field'\n   		 value = 'Title'\n   		 size = '20px'\n   		 color = '#04173D'\n   		 bold = 'true'\n   		 numOfLines = '1'\n\n>\n</text>\n\n\n</pc>\n</pr><pr \n>\n	<pc \n>\n	<text    		 type = 'field'\n   		 value = 'Address'\n   		 size = '15px'\n   		 color = '#333333'\n   		 marginLeft = '0px'\n   		 marginRight = '0px'\n   		 marginTop = '8px'\n   		 marginBottom = '0px'\n   		 numOfLines = '3'\n\n>\n</text>\n\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr><pr    		 height = 'fill'\n   		 width = 'fill'\n\n>\n	<pc    		 width = '50%'\n   		 bgColor = 'transparent'\n   		 paddingTop = '0px'\n   		 paddingLeft = '0px'\n   		 paddingRight = '10px'\n   		 paddingBottom = '0px'\n   		 hAlign = 'left'\n   		 vAlign = 'top'\n\n>\n	<pr    		 height = 'auto'\n   		 width = 'auto'\n\n>\n	<pc \n>\n	<text    		 type = 'field'\n   		 value = 'latitude1'\n   		 size = '15px'\n   		 color = '#4C4C4C'\n   		 marginTop = '22px'\n   		 numOfLines = '1'\n\n>\n</text>\n\n\n</pc>\n</pr>\n</pc><pc    		 width = '50%'\n   		 bgColor = 'transparent'\n   		 paddingTop = '0px'\n   		 paddingLeft = '10px'\n   		 paddingRight = '0px'\n   		 paddingBottom = '0px'\n   		 hAlign = 'right'\n   		 vAlign = 'top'\n\n>\n	<pr    		 height = 'auto'\n   		 width = 'auto'\n\n>\n	<pc \n>\n	<text    		 type = 'field'\n   		 value = 'longitude1'\n   		 size = '15px'\n   		 color = '#4C4C4C'\n   		 marginTop = '22px'\n   		 numOfLines = '1'\n\n>\n</text>\n\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+		    			)
+	     			)
+		 			type = Custom
+		 			selectedlayout = "Card"
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    	 			)
+							record
+							(
+								Edit   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								Edit   	   
+    						)
+							on right click
+							(
+								Edit   	   
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+		     			title = "Overview"
+						fields
+						(
+							Image
+							Title
+							Address
+							ID
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		list All_Apartments
+		{
+			displayName = "All Apartments"
+			show all rows from Apartment    
+			(
+				id1 as "objectId"
+				Title
+				Image
+				longitude1 as "longitude"
+				latitude1 as "latitude"
+				Address 
+	 			(
+	      			displayformat = [address_line_1+""+address_line_2+""+district_city+""+state_province+""+postal_Code+""+country]
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Scheduled as "isScheduled"
+				Scheduled_Visits as "Scheduled Visits"
+				ID
+			)
+			sort by
+			(
+				Address.address_line_1 ascending
+			)
+			options
+			(
+				icon = "design-bullet-list-67"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+			 			layout type = -1
+		     			title = "Overview"
+						fields
+						(
+							ID
+							id1 as "objectId"
+							Image
+							Scheduled as "isScheduled"
+							Title
+							Address
+							latitude1 as "latitude"
+							longitude1 as "longitude"
+							Scheduled_Visits as "Scheduled Visits"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    		 			Add 
+    		 			Print 
+    		 			Import 
+    		 			Export 
+    	 			)
+							record
+							(
+								Edit   	   
+								Duplicate   	   
+								Print   	   
+								Delete   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								View Record   	   
+    						)
+							on right click
+							(
+								Edit   	   
+								Delete   	   
+								Duplicate   	   
+								Print   	   
+								View Record   	   
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+		     			title = "Overview"
+						fields
+						(
+							id1 as "objectId"
+							Title
+							latitude1 as "latitude"
+							longitude1 as "longitude"
+							Image
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Print 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		map Apartments_Map
+		{
+			displayName = "Apartments Map"
+			show all rows from Apartment    
+			(
+				id1 as "objectId"
+				Title
+				Address 
+	 			(
+	      			displayformat = [address_line_1+""+district_city+""+state_province+""+postal_Code+""+country]
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Image
+			)
+			options
+			(
+	 			display field = Address
+         		location
+         		(
+	 		 		latitude  = 32.783762335328
+	 		 		longitude = -96.7918166695299
+         		)
+	 	 		radius = 600 Miles
+	 		)
+			custom actions
+			(
+				"Schedule Visit"
+				(
+	  			workflow = Add_Visit
+				show action in edit record menu = true
+				)
+			)
+			conditional formatting
+			(
+				"Pin"
+				{
+				format = "color:#1d508e;map-icon:weather-moon-full;map-icon-color:#ffffff;"
+				}
+				"Scheduled"
+				{
+				condition = (Scheduled == true)
+				format = "color:#ef1616;map-icon:weather-moon-full;map-icon-color:#ffffff;"
+				}
+			)
+			quickview
+			(
+				layout
+				(
+		 			type = 3
+					datablock1
+					(
+			 			layout type = 7
+		     			title = "Overview"
+						fields
+						(
+							Image
+							Title
+							Address
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+							record
+							(
+								"Schedule Visit"
+								Edit   	   
+								Delete   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								"Schedule Visit"
+    						)
+							on right click
+							(
+								Edit   	   
+								Delete   	   
+								Duplicate   	   
+								View Record   	   
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+		     			title = "Overview"
+						fields
+						(
+							id1 as "objectId"
+							Title
+							Address
+							Image
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+	}
+	section Visits
+	{
+		default list All_Visits
+		{
+			displayName = "All Visits"
+			show all rows from Visit    
+			(
+				Apartment
+				Date_field as "Date"
+				Time
+				Apartment.Address 
+	 			(
+	      			displayformat = [address_line_1+""+address_line_2+""+district_city+""+state_province+""+postal_Code]
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+			)
+			options
+			(
+				icon = "design-bullet-list-67"
+	 		)
+			custom actions
+			(
+				"View Visit"
+				(
+	  			workflow = View_Visit
+				show action in edit record menu = true
+				)
+				"View Visit JS"
+				(
+	  			workflow = View_Visit_JS
+				)
+			)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+			 			layout type = -1
+		     			title = "Overview"
+						fields
+						(
+							Date_field as "Date"
+							Time
+							Apartment
+							Apartment.Address as "Address"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Delete 
+    	 			)
+							record
+							(
+								"View Visit"
+								Edit   	   
+								Delete   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								"View Visit JS"
+    						)
+							on right click
+							(
+								"View Visit"
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+		     			title = "Overview"
+						fields
+						(
+							Apartment
+							Date_field as "Date"
+							Time
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+				 page View_Visit(record_id,distance) 
+	 	 { 
+ 	 	 displayname = "View Visit" 
+
+ 	 	 icon = "design-window-paragraph" 
+	 	 Content="<zml \n\t\t\tisPdfEnabled='false'\n\t\t\n\t\t\tisPrintEnabled='false'\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dspZml id='zml_snippet'>\n\t<![CDATA[htmlpage zml_snippet(record_id,distance)\ncontent\n&lt;%{\n\ttitle = &quot; &quot;;\n\taddress = &quot; &quot;;\n\tif(ifnull(record_id,&quot;&quot;) != &quot;&quot;)\n\t{\n\t\trec = Visit[ID == input.record_id.toLong()];\n\t\ttitle = ifnull(rec.Apartment.Title,&quot;&quot;);\n\t\taddress = ifnull(rec.Apartment.Address,&quot;&quot;);\n\t}\n\t%&gt;\n&lt;panel&gt;\n  &lt;pr height=&apos;fill&apos; width=&apos;fill&apos;&gt;\n    &lt;pc width=&apos;100%&apos; bgColor=&apos;#FFFFFF&apos; padding=&apos;20px&apos; hAlign=&apos;right&apos; vAlign=&apos;middle&apos; bgtype=&apos;gallery&apos; bgImageRepeat=&apos;no-repeat no-repeat&apos; bgImagePosition=&apos;fill&apos; bgHorizontalAlign=&apos;center&apos; bgVerticalAlign=&apos;center&apos; bgImage=&apos;pinned-map.png&apos;&gt;\n      &lt;pr height=&apos;auto&apos; width=&apos;auto&apos;&gt;\n        &lt;pc padding=&apos;5px&apos;&gt;\n          &lt;pr&gt;\n            &lt;pc&gt;\n              &lt;text type=&apos;Text&apos; value=&apos;&lt;%=title%&gt;&apos; size=&apos;40px&apos; color=&apos;#CB3B23&apos; bold=&apos;true&apos;&gt; &lt;\/text&gt;\n            &lt;\/pc&gt;\n          &lt;\/pr&gt;\n          &lt;pr&gt;\n            &lt;pc&gt;\n              &lt;text type=&apos;Text&apos; value=&apos;&lt;%=address%&gt;&apos; size=&apos;20px&apos; color=&apos;#333333&apos; bold=&apos;true&apos;&gt; &lt;\/text&gt;\n            &lt;\/pc&gt;\n          &lt;\/pr&gt;\n        &lt;\/pc&gt;\n      &lt;\/pr&gt;\n    &lt;\/pc&gt;\n  &lt;\/pr&gt;\n&lt;\/panel&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dspZml>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<form    \t\t appLinkName = 'thisapp'\n   \t\t urlAppLinkName = 'thisapp'\n   \t\t heightType = 'custom'\n   \t\t heightValue = '130px'\n   \t\t linkName = 'Edit_Visit'\n   \t\t searchString = 'record_id=${record_id}&amp;distance=${distance}'\n   \t\t zc_Header = 'false'\n   \t\t urlType = 'none'\n   \t\t allowPublicAccess = 'false'\n\n\/>\n\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet' \n\n\t\tbgColor=\"#FFFFFF\"\n\t\n>\n\t<![CDATA[htmlpage html_snippet(record_id,distance)\ncontent\n&lt;%{\n\t\/*******************************************************************************************\n    * \t\t\t\t\t\t\t\t\tStatic Map Widget\n\t* \t\t\t        https:\/\/docs.mapbox.com\/api\/maps\/static-images\/\n\t*\n    *\t\t\tthis code generates map 1200x350 for retina screed (double density)\n    *\t\t\tvalidate distance in the loop and put the points within the range on map\n    *           and draw circle with given radius\n\t* \t\t\t\n    *\/\n\turl = &quot;&quot;;\n\tif(ifnull(record_id,&quot;&quot;) != &quot;&quot;)\n\t{\n\t\t\/\/ calculate distance in meters\n\t\tdist = floor(ifnull(distance,&quot;20&quot;).toLong() * 1609.0);\n\t\t\/\/ get center of map\n\t\trec = Visit[ID == input.record_id.toLong()];\n\t\tcenter = Apartment[ID == rec.Apartment];\n\t\t\/\/\n\t\t\/\/ define the list of map objects\n\t\toverlay = List();\n\t\t\/\/\n\t\t\/\/ get the square boundaries from center with specified distance\n\t\tbr = thisapp.geo.square_bounds(center.latitude1,center.longitude1,dist);\n\t\t\/\/\n\t\t\/\/ Generate the points for the corners\n\t\tSW = br.get(&quot;longmin&quot;) + &quot;,&quot; + br.get(&quot;latmax&quot;);\n\t\tNW = br.get(&quot;longmin&quot;) + &quot;,&quot; + br.get(&quot;latmin&quot;);\n\t\tNE = br.get(&quot;longmax&quot;) + &quot;,&quot; + br.get(&quot;latmin&quot;);\n\t\tSE = br.get(&quot;longmax&quot;) + &quot;,&quot; + br.get(&quot;latmax&quot;);\n\t\t\/\/\n\t\t\/\/Generate the points for the square\n\t\tls = {&quot;[&quot; + SW + &quot;]&quot;,&quot;[&quot; + NW + &quot;]&quot;,&quot;[&quot; + NE + &quot;]&quot;,&quot;[&quot; + SE + &quot;]&quot;,&quot;[&quot; + SW + &quot;]&quot;};\n\t\toverlay.add(thisapp.mapbox.polygon_json(ls.toString(),&quot;#084B8A&quot;,0.2));\n\t\t\/\/\n\t\t\/\/Generate the points for the circle\n\t\tls = thisapp.geo.circle(center.latitude1,center.longitude1,dist,60);\n\t\toverlay.add(thisapp.mapbox.polygon_json(ls.toString(),&quot;#FA5858&quot;,0.3));\n\t\t\/\/\n\t\t\/\/ filter apartments using  square boundaries \n\t\tpoints = Apartment[latitude1 &gt;= br.get(&quot;latmin&quot;) &amp;&amp; latitude1 &lt;= br.get(&quot;latmax&quot;) &amp;&amp; longitude1 &gt;= br.get(&quot;longmin&quot;) &amp;&amp; longitude1 &lt;= br.get(&quot;longmax&quot;)] range from 1 to 200;\n\t\tfor each  point in points\n\t\t{\n\t\t\t\/\/calculate the range for each point\n\t\t\trange = thisapp.geo.distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);\n\t\t\tif(range &lt; dist &amp;&amp; point.ID != center.ID)\n\t\t\t{\n\t\t\t\t\/\/ put on map only validated points\n\t\t\t\toverlay.add(&quot;pin-s-circle+0B4C5F(&quot; + point.longitude1 + &quot;,&quot; + point.latitude1 + &quot;)&quot;);\n\t\t\t}\n\t\t}\n\t\t\/\/\n\t\t\/\/ put the center point on map\n\t\tcenter_lnglat = center.longitude1 + &quot;,&quot; + center.latitude1;\n\t\toverlay.add(&quot;pin-s-circle+B40404(&quot; + center_lnglat + &quot;)&quot;);\n\t\t\/\/\n\t\t\/\/ calculate the scale of map depends on distance\n\t\tSCALE = {&quot;200&quot;:&quot;5.2&quot;,&quot;100&quot;:&quot;6.1&quot;,&quot;50&quot;:&quot;7.1&quot;,&quot;20&quot;:&quot;8.4&quot;,&quot;10&quot;:&quot;9.4&quot;,&quot;5&quot;:&quot;10.5&quot;};\n\t\t\/\/\n\t\t\/\/ generate the url for map preview using mapbox API\n\t\turl = &quot;https:\/\/api.mapbox.com\/styles\/v1\/vatsenko\/ckivvxiop289p19o7t789m3zk\/static\/&quot; + overlay + &quot;\/&quot; + center_lnglat + &quot;,&quot; + SCALE.get(distance) + &quot;,0,50\/1200x350@2x?access_token=&quot; + thisapp.mapbox.token();\n\t}\n\t%&gt;\n&lt;!-- BEGIN --&gt;\n&lt;style&gt;\n.map-wrapper {\n\twidth: 100%;\n\theight: 350px;\n\tbackground-color: #eee;\n\toverflow:hidden;\n\ttext-align:center;\n}\n.mapbox-map{\n\tmargin: 0px auto;\n\theight:100%;\n\twidth:auto;\n}\n&lt;\/style&gt;\n&lt;div class=&quot;map-wrapper&quot;&gt;\n\t&lt;img class=&quot;mapbox-map&quot; src=&quot;&lt;%=url%&gt;&quot;&gt;&lt;\/img&gt;\n&lt;\/div&gt;\n&lt;!-- END --&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet1' \n\n\t\tbgColor=\"#FFFFFF\"\n\t\n>\n\t<![CDATA[htmlpage html_snippet1(record_id,distance)\ndisplayname = &quot;html_snippet&quot;\ncontent\n&lt;%{\n\thtml = &quot;&quot;;\n\tif(ifnull(record_id,&quot;&quot;) != &quot;&quot;)\n\t{\n\t\t\/\/ calculate distance in meters\n\t\tdist = floor(ifnull(distance,&quot;20&quot;).toLong() * 1609.0);\n\t\t\/\/ get center of map\n\t\trec = Visit[ID == input.record_id.toLong()];\n\t\tcenter = Apartment[ID == rec.Apartment];\n\t\t\/\/\n\t\t\/\/ get the square boundaries from center with specified distance\n\t\tbr = thisapp.geo.square_bounds(center.latitude1,center.longitude1,dist);\n\t\t\/\/\n\t\t\/\/ filter apartments using  square boundaries \n\t\tpoints = Apartment[latitude1 &gt;= br.get(&quot;latmin&quot;) &amp;&amp; latitude1 &lt;= br.get(&quot;latmax&quot;) &amp;&amp; longitude1 &gt;= br.get(&quot;longmin&quot;) &amp;&amp; longitude1 &lt;= br.get(&quot;longmax&quot;)] range from 1 to 200;\n\t\t\/\/\n\t\t\/\/ create the index for points\n\t\tdistance_index = Collection();\n\t\t\/\/\n\t\t\/\/ iterate points, filter by distance, add to index\n\t\tfor each  point in points\n\t\t{\n\t\t\t\/\/calculate the range for each point\n\t\t\trange = thisapp.geo.distance(center.latitude1,center.longitude1,point.latitude1,point.longitude1);\n\t\t\tif(range &lt; dist &amp;&amp; point.ID != center.ID)\n\t\t\t{\n\t\t\t\t\/\/ put on map only validated points\n\t\t\t\tdistance_index.insert(point.ID:round(range \/ 1609,1));\n\t\t\t}\n\t\t}\n\t\t\/*\n\t\t\t\/\/\t\t\trecord_id.       : distance\n\t\t\t{\n\t\t\t\t\t&quot;1581254000005241047&quot;: 17908.38,\n\t\t\t\t\t&quot;1581254000005241079&quot;: 12295.88,\n\t\t\t\t\t&quot;1581254000005241155&quot;: 13564.91,\n\t\t\t\t\t&quot;1581254000005241167&quot;: 11995.01,\n\t\t\t\t\t&quot;1581254000005241199&quot;: 9415.12,\n\t\t\t\t\t...\n\t\t\t\t\t&quot;1581254000005243747&quot;: 16795.64,\n\t\t\t\t\t&quot;1581254000005243907&quot;: 22025.39\n\t\t\t}\n\t\t*\/\n\t\t\/\/\n\t\t\/\/ Sort points by distance value \n\t\tdistance_index.sort();\n\t\t\/\/\n\t\t\/\/ add sorted points on map \n\t\tfor each  point_id in distance_index.keys()\n\t\t{\n\t\t\tp = Apartment[ID == point_id.toLong()];\n\t\t\tpopup_link = &quot;#Form:Visit?Apartment=&quot; + point_id + &quot;&amp;zc_LoadIn=dialog&quot;;\n\t\t\thtml = html + &quot;&lt;div class=&apos;link-wrapper&apos;&gt;&quot;;\n\t\t\thtml = html + &quot;  &lt;a id=&apos;&quot; + point_id + &quot;&apos; target=&apos;_self&apos; class=&apos;point&apos; href=&apos;&quot; + popup_link + &quot;&apos;&gt;&quot;;\n\t\t\thtml = html + &quot;\t    &lt;div class=&apos;apartment-name&apos;&gt;&quot; + p.Title + &quot;&lt;\/div&gt;&quot;;\n\t\t\thtml = html + &quot;     &lt;div class=&apos;distance&apos;&gt;&quot; + distance_index.get(point_id) + &quot;mi.&lt;\/div&gt;&quot;;\n\t\t\thtml = html + &quot;  &lt;\/a&gt;\\n&lt;\/div&gt;&quot;;\n\t\t}\n\t}\n\t%&gt;\n&lt;!-- BEGIN --&gt;\n&lt;style&gt;\n\t.point-list{\n\t\tmax-width:1200px;\n\t\tmargin:20px auto 10px;\n\t}\n\t.link-wrapper{\n\t\tfloat: left;\n  \t\twidth: 50%;\n\t\t\n\t}\n\n\t.apartment-name{\n\t\tflex-grow: 2;\n\t\twidth:60%;\n\t\tpadding:4px 15px;\n\t}\n\t.distance{\n\t\tflex-grow: 1;\n\t\twidth:30%;\n\t\tpadding:4px 15px;\n\t\ttext-align:right;\n\t}\n\t.point {\n\t\tdisplay:flex;\n\t\tflex-direction:row;\n\t\tmax-width:1200px;\n\t\tmargin:0px auto;\n\t\tpadding: 2px 25px;\n\t}\n\t.point:hover{\n\t\tbackground:#eaeaef;\n\t}\n&lt;\/style&gt;\n&lt;div class=&quot;point-list&quot;&gt;\n\t&lt;%=html%&gt;\n&lt;\/div&gt;\n&lt;!-- END --&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>" 
+ 	 	}
+				 page View_Visit_JS(record_id,distance) 
+	 	 { 
+ 	 	 displayname = "View Visit JS" 
+
+ 	 	 icon = "design-window-paragraph" 
+	 	 Content="<zml \n\t\t\tisPdfEnabled='false'\n\t\t\n\t\t\tisPrintEnabled='false'\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dspZml id='zml_snippet1'>\n\t<![CDATA[htmlpage zml_snippet1(record_id,distance)\ndisplayname = &quot;zml_snippet&quot;\ncontent\n&lt;%{\n\ttitle = &quot; &quot;;\n\taddress = &quot; &quot;;\n\tif(ifnull(record_id,&quot;&quot;) != &quot;&quot;)\n\t{\n\t\trec = Visit[ID == input.record_id.toLong()];\n\t\ttitle = ifnull(rec.Apartment.Title,&quot;&quot;);\n\t\taddress = ifnull(rec.Apartment.Address,&quot;&quot;);\n\t}\n\t%&gt;\n&lt;panel&gt;\n  &lt;pr height=&apos;fill&apos; width=&apos;fill&apos;&gt;\n    &lt;pc width=&apos;100%&apos; bgColor=&apos;#FFFFFF&apos; padding=&apos;20px&apos; hAlign=&apos;right&apos; vAlign=&apos;middle&apos; bgtype=&apos;gallery&apos; bgImageRepeat=&apos;no-repeat no-repeat&apos; bgImagePosition=&apos;fill&apos; bgHorizontalAlign=&apos;center&apos; bgVerticalAlign=&apos;center&apos; bgImage=&apos;pinned-map.png&apos;&gt;\n      &lt;pr height=&apos;auto&apos; width=&apos;auto&apos;&gt;\n        &lt;pc padding=&apos;5px&apos;&gt;\n          &lt;pr&gt;\n            &lt;pc&gt;\n              &lt;text type=&apos;Text&apos; value=&apos;&lt;%=title%&gt;&apos; size=&apos;40px&apos; color=&apos;#CB3B23&apos; bold=&apos;true&apos;&gt; &lt;\/text&gt;\n            &lt;\/pc&gt;\n          &lt;\/pr&gt;\n          &lt;pr&gt;\n            &lt;pc&gt;\n              &lt;text type=&apos;Text&apos; value=&apos;&lt;%=address%&gt;&apos; size=&apos;20px&apos; color=&apos;#333333&apos; bold=&apos;true&apos;&gt; &lt;\/text&gt;\n            &lt;\/pc&gt;\n          &lt;\/pr&gt;\n        &lt;\/pc&gt;\n      &lt;\/pr&gt;\n    &lt;\/pc&gt;\n  &lt;\/pr&gt;\n&lt;\/panel&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dspZml>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<form    \t\t appLinkName = 'thisapp'\n   \t\t urlAppLinkName = 'thisapp'\n   \t\t heightType = 'custom'\n   \t\t heightValue = '130px'\n   \t\t linkName = 'Edit_Visit'\n   \t\t searchString = 'record_id=${record_id}&amp;distance=${distance}&amp;Widget=Dynamic'\n   \t\t zc_Header = 'false'\n   \t\t urlType = 'none'\n   \t\t allowPublicAccess = 'false'\n\n\/>\n\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<widgets\/>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>" 
+ 	 	}
+	}
+	section Admin
+	{
+		form Apartment
+		{
+			success message = "Apartment Added Successfully"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			id1
+			(
+    			type = text
+				displayname = "objectId"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Title
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = large
+			)
+			Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = true
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = large
+				personal data = true
+			)
+			Image
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Admin_Section
+			(
+				type = section
+				displayname = "Admin Section"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			latitude1
+			(
+    			type = formula
+				displayname = "latitude"
+				value =  round(toDecimal(input.Address.latitude),5)
+				visibility = false
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			longitude1
+			(
+    			type = formula
+				displayname = "longitude"
+				value =  round(toDecimal(input.Address.longitude),5)
+				visibility = false
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Scheduled_Visits
+			(
+				type = list
+				displayname = "Scheduled Visits"
+				values  = Visit.ID
+    			bidirectional = Apartment
+    			displayformat = [Date_field]
+				height = 60px
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Scheduled
+			(
+    			type = formula
+				displayname = "isScheduled"
+				value =  if(Scheduled_Visits != null,true,false)
+				visibility = false
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "ui-1-bold-add"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Visit
+		{
+			success message = "Visit Added Successfully"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Apartment
+			(
+				type = picklist
+				values  = Apartment.ID
+    			bidirectional = Scheduled_Visits
+    			displayformat = [Title]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Date_field
+			(
+    			type = date
+				displayname = "Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Time
+			(
+    			type = time
+				mins_displayinterval = 10
+				timedisplayoptions = "hh:mm" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "ui-1-bold-add"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Edit_Visit
+		{
+			displayname = "Edit Visit"
+			store data in zc = false
+			success message = "Data Added Successfully!"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Date_field
+			(
+    			type = date
+				displayname = "Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Time
+			(
+    			type = time
+				mins_displayinterval = 10
+				timedisplayoptions = "hh:mm" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Show_Apartments_Within
+			(
+				type = picklist
+				displayname = "Show Apartments Within"
+				values = {"5 miles", "10 miles", "20 miles", "50 miles", "100 miles", "200 miles"}
+				initial value = "20 miles"
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			css
+			(
+    			type = plaintext
+				value = "Add your Note here ..."
+	 			row = 1
+	 			column = 2   
+				width = medium
+			)
+			Hidden_Section
+			(
+				type = section
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Visit
+			(
+				type = picklist
+				values  = Visit.ID
+    			displayformat = [ID]
+				searchable = true
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Widget
+			(
+    			type = text
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			distance
+			(
+    			type = text
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			record_id
+			(
+    			type = text
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "ui-1-bold-add"
+			)
+		}
+	}
+	functions
+	{
+ 			string geocoding.Zoho_Geocoding()
+			{
+				rec = Apartment[ID != 0] range from 1 to 20;
+				counter = 0;
+				for each  r in rec
+				{
+					// convert address to string
+					address = r.Address.toString();
+					//
+					// generate friendly name
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + " " + r.Address.postal_Code + ", US";
+					//
+					// geocoge address using zoho map function
+					response = zoho.map.geoCode(address);
+					/*
+						// sample of response:
+						response = {
+							"latitude":"29.6278757",
+							"longitude":"-98.4950131",
+							"status":"success"
+						}
+					*/
+					if(response.get("status") == "success")
+					{
+						info "OK";
+						counter = counter + 1;
+					}
+					else
+					{
+						info "FAULT";
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string geocoding.Google_Geocoding()
+			{
+				/*******************************************************************************************
+				 *									GOOGLE API Geocoding 
+				 *					https://developers.google.com/maps/documentation/geocoding/start
+				 */
+				rec = Apartment[ID != 0] range from 1 to 30;
+				counter = 0;
+				for each  r in rec
+				{
+					// generate friendly name
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+					url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeUrl(address) + "&key=" + thisapp.google.apikey();
+					response = getUrl(url);
+					info address;
+					if(response.get("status") == "OK")
+					{
+						result = response.get("results").toJSONList().get(0);
+						info result.get("geometry").get("location_type");
+						if(result.get("geometry").get("location_type") == "ROOFTOP" || result.get("geometry").get("location_type") == "RANGE_INTERPOLATED" || result.get("geometry").get("location_type") == "GEOMETRIC_CENTER")
+						{
+							counter = counter + 1;
+						}
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string google.apikey()
+			{
+				return "";
+			}
+ 			string mapbox.token()
+			{
+				return "pk..";
+			}
+ 			float geo.atan2(float y, float x)
+			{
+				/*******************************************************************************************
+			    * 				
+			    *          					Implementation of atan2 function
+			    *
+				//
+				PI_FLOAT = 3.141592653589793;
+				PIBY2_FLOAT = 1.570796326794897;
+				if(input.x == 0.0)
+				{
+					if(input.y > 0.0)
+					{
+						atan2 = PIBY2_FLOAT;
+					}
+					else if(input.y == 0.0)
+					{
+						atan2 = 0.0;
+					}
+					else
+					{
+						atan2 = 0 - PIBY2_FLOAT;
+					}
+				}
+				else
+				{
+					z = y / x;
+					if(abs(z) < 1.0)
+					{
+						atan = z / (1.0 + 0.28 * z * z);
+						if(input.x < 0.0)
+						{
+							if(input.y < 0.0)
+							{
+								atan2 = atan - PI_FLOAT;
+							}
+							else
+							{
+								atan2 = atan + PI_FLOAT;
+							}
+						}
+						else
+						{
+							atan2 = atan;
+						}
+					}
+					else
+					{
+						atan = PIBY2_FLOAT - z / (z * z + 0.28);
+						if(input.y < 0)
+						{
+							atan2 = atan - PI_FLOAT;
+						}
+						else
+						{
+							atan2 = atan;
+						}
+					}
+				}
+				*/
+				// in one line:
+				return if(x == 0.0,if(y >= 0.0,1.570796326794897,-1.570796326794897),if(x > 0,atan(y / x),atan(y / x) + if(y >= 0.0,3.141592653589793,-3.141592653589793)));
+			}
+ 			float geo.distance(float latitude1, float longitude1, float latitude2, float longitude2)
+			{
+				/*******************************************************************************************
+			    * 				
+			    *          			Haversine formula
+				*		Returns the distance between two points in kilometers (short version)
+				* 		
+				//
+				
+				pi = 3.14159265358979;
+				// radius in meters
+				rad = 6371000.0;
+				lat1 = ifnull(latitude1,50.515721) * pi / 180.0;
+				lat2 = ifnull(latitude2,50.393762) * pi / 180.0;
+				long1 = ifnull(longitude1,30.362062) * pi / 180.0;
+				long2 = ifnull(longitude2,30.677884) * pi / 180.0;
+				//
+				cl1 = cos(lat1);
+				cl2 = cos(lat2);
+				sl1 = sin(lat1);
+				sl2 = sin(lat2);
+				//
+				delta = long2 - long1;
+				cdelta = cos(delta);
+				sdelta = sin(delta);
+				//
+				y = sqrt(power(cl2 * sdelta,2) + power(cl1 * sl2 - sl1 * cl2 * cdelta,2));
+				x = sl1 * sl2 + cl1 * cl2 * cdelta;
+				//info "x,y:" + x + ", " + y;
+				ad = thisapp.atan2(y,x);
+				dist = ad * rad;
+				
+				*/
+				PI = 3.14159265358979;
+				lat1 = latitude1 * PI / 180.0;
+				lat2 = latitude2 * PI / 180.0;
+				long1 = longitude1 * PI / 180.0;
+				long2 = longitude2 * PI / 180.0;
+				y = sqrt(power(cos(lat2) * sin(long2 - long1),2) + power(cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(long2 - long1),2));
+				x = sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long2 - long1);
+				// for miles we have to divide result on 1609
+				return thisapp.geo.atan2(y,x) * 6371000.0;
+			}
+ 			map geo.bearing(float lat1, Float lon1, float angle, float Distance)
+			{
+				/*******************************************************************************************
+			    * 				
+				*		Returns the coordinates of point away on Distance 
+				* 		from given coordinates and with azimuth angle clockwize
+				* 		http://www.edwilliams.org/avform.htm#LL
+				* 		(0 - North, 90 - West, 180 - South, 270 - East)
+				*		expect distance in meters
+			    */
+				PI = 3.14159265358979;
+				angle_rad = 2 * PI * angle / 360;
+				Lat = lat1 * PI / 180.0;
+				Lng = lon1 * PI / 180.0;
+				d = Distance / 6371000.0;
+				//
+				pLat = asin(sin(Lat) * cos(d) + cos(Lat) * sin(d) * cos(angle_rad));
+				pLng = ((Lng + thisapp.geo.atan2(sin(angle_rad) * sin(d) * cos(Lat),cos(d) - sin(Lat) * sin(pLat))) * 180) / PI;
+				pLat = (pLat * 180) / PI;
+				return {"lat":round(pLat,5),"long":round(pLng,5)};
+			}
+ 			map geo.square_bounds(float Lat, float Lng, int Distance)
+			{
+				/*******************************************************************************************
+			    * 				
+			    *       Get the square boundaries away on Distance from given point
+				* 		using Reverse haversine formula
+				*		Center - Lat, Lng
+				*/
+				latmax = thisapp.geo.bearing(Lat,Lng,0,Distance).get("lat");
+				longmax = thisapp.geo.bearing(Lat,Lng,90,Distance).get("long");
+				latmin = thisapp.geo.bearing(Lat,Lng,180,Distance).get("lat");
+				longmin = thisapp.geo.bearing(Lat,Lng,270,Distance).get("long");
+				//
+				/*
+					{
+						"latmin":30.22225,
+						"latmax":30.80089,
+						"longmin":-97.91657,
+						"longmax":-97.24493
+					}
+				*/
+				return {"latmin":min(round(latmin,5),round(latmax,5)),"latmax":max(round(latmin,5),round(latmax,5)),"longmin":min(round(longmin,5),round(longmax,5)),"longmax":max(round(longmin,5),round(longmax,5))};
+			}
+ 			list geo.circle(float lat1, float lon1, int Distance, int vertices_num)
+			{
+				/*******************************************************************************************
+			    * 				
+			    *       Draw regular poligon 
+				*		Center - lat1, lon1
+				* 		Radius - Distance
+				* 		Number of corners - vertices_num
+				* 		for the circle - we use 36+ points (depends on radius)
+				* 		NOTE: This function returns array of arrays with longitude on first place and latitude on second
+				* 		for google and others api - change the order of params
+				*/
+				points = List:Map();
+				step = 360 / vertices_num;
+				counter = leftpad("1",vertices_num).replaceAll(" ","0,").toList();
+				circle = List();
+				for each index i in counter
+				{
+					angle = i * step;
+					dest = thisapp.geo.bearing(lat1,lon1,angle,Distance);
+					circle.add("[" + dest.get("long") + "," + dest.get("lat") + "]");
+				}
+				start_point = circle.get(0);
+				circle.add(start_point);
+				return circle;
+			}
+ 			string mapquest.apikey()
+			{
+				return "";
+			}
+ 			string geocoding.OpenStreet_Geocoding()
+			{
+				/*******************************************************************************************
+				 *									OpenStreetMap Geocoding 
+				 *			http://developer.mapquest.com/documentation/open/geocoding-api/address/get/
+				 */
+				rec = Apartment[ID != 0] range from 1 to 30;
+				counter = 0;
+				for each  r in rec
+				{
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+					url = "https://open.mapquestapi.com/geocoding/v1/address?outFormat=json&thumbMaps=false&location=" + encodeUrl(address) + "&key=" + thisapp.mapquest.apikey();
+					response = getUrl(url);
+					info address;
+					if(response.getJSON("info").getJSON("statuscode") == 0)
+					{
+						results = response.getJSON("results").toJSONList();
+						result = results.get(0);
+						info result.getJSON("locations").getJSON("geocodeQuality") + "-" + result.getJSON("locations").getJSON("geocodeQualityCode");
+						if(result.getJSON("locations").getJSON("geocodeQuality") == "STREET" || result.getJSON("locations").getJSON("geocodeQuality") = "ADDRESS" || result.getJSON("locations").getJSON("geocodeQuality") = "POINT")
+						{
+							counter = counter + 1;
+						}
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string geocoding.ArcGIS_Geocoding()
+			{
+				/*******************************************************************************************
+				 *									MapQuest Geocoding 
+				 *			http://developer.mapquest.com/documentation/geocoding-api/address/get/
+				 */
+				rec = Apartment[ID != 0] range from 1 to 30;
+				counter = 0;
+				for each  r in rec
+				{
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+					url = "https://www.mapquestapi.com/geocoding/v1/address?outFormat=json&thumbMaps=false&location=" + encodeUrl(address) + "&key=" + thisapp.mapquest.apikey();
+					response = getUrl(url);
+					info address;
+					if(response.getJSON("info").getJSON("statuscode") == 0)
+					{
+						results = response.getJSON("results").toJSONList();
+						for each  result in results
+						{
+							info result.getJSON("locations").getJSON("geocodeQuality") + "-" + result.getJSON("locations").getJSON("geocodeQualityCode");
+							if(result.getJSON("locations").getJSON("geocodeQuality") == "STREET" || result.getJSON("locations").getJSON("geocodeQuality") = "ADDRESS" || result.getJSON("locations").getJSON("geocodeQuality") = "POINT")
+							{
+								counter = counter + 1;
+							}
+						}
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string geocoding.OpenStreet_5P_Geocoding()
+			{
+				/*******************************************************************************************
+				 *									OpenStreetMap 5-Point Geocoding 
+				 *			http://developer.mapquest.com/documentation/open/geocoding-api/address/get/
+				 */
+				rec = Apartment[ID != 0] range from 1 to 30;
+				counter = 0;
+				for each  r in rec
+				{
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+					url = "http://open.mapquestapi.com/geocoding/v1/address?outFormat=json&thumbMaps=false&street=" + encodeUrl(r.Address.address_line_1) + "&city=" + encodeUrl(r.Address.district_city) + "&state=" + encodeUrl(r.Address.state_province) + "&postalCode=" + encodeUrl(r.Address.postal_Code) + "&key=" + thisapp.mapquest.apikey();
+					response = getUrl(url);
+					info address;
+					if(response.getJSON("info").getJSON("statuscode") == 0)
+					{
+						results = response.getJSON("results").toJSONList();
+						result = results.get(0);
+						info result.getJSON("locations").getJSON("geocodeQuality") + "-" + result.getJSON("locations").getJSON("geocodeQualityCode");
+						if(result.getJSON("locations").getJSON("geocodeQuality") == "STREET" || result.getJSON("locations").getJSON("geocodeQuality") = "ADDRESS" || result.getJSON("locations").getJSON("geocodeQuality") = "POINT")
+						{
+							counter = counter + 1;
+						}
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string geocoding.Zoho_Geocoding_AI()
+			{
+				/*******************************************************************************************
+				 *									Zoho Geocoding 
+				 *						https://www.zoho.com/deluge/help/map-tasks/geocode.html
+				 *					                + Parsing Address
+				 *				 		https://www.zoho.com/deluge/help/ai-tasks/parse-address.html
+				 */
+				rec = Apartment[ID != 0] range from 1 to 20;
+				counter = 0;
+				for each  r in rec
+				{
+					// parse address
+					response = zoho.ai.parseAddress(r.Address.toString());
+					/*
+						// sample of response:
+						response = {
+							"data":{
+								"items":[
+									{
+									"house_number":"4920",
+									"road":"state road 33 n",
+									"city":"lakeland",
+									"state":"fl",
+									"postcode":"33805",
+									"country":"us",
+									}
+								]
+							},
+							"message":"OK",
+							"status":200
+						}
+					*/
+					//
+					// generate friendly name
+					items = response.get("data").get("items").get(0);
+					address = items.get("house_number") + " " + items.get("road") + ", " + items.get("city") + ", " + items.get("state") + ", " + items.get("postcode") + ", " + items.get("country");
+					//
+					// geocode
+					response = zoho.map.geoCode(address);
+					if(response.get("status") == "success")
+					{
+						info "OK";
+						counter = counter + 1;
+					}
+					else
+					{
+						info "FAULT";
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string mapbox.polygon_json(string points, string color, float opacity)
+			{
+				geojson = "{\"type\":\"Feature\",\"properties\":{\"fill\": \"" + color + "\",\"fill-opacity\": " + opacity + ",\"stroke-width\": 1,\"stroke-opacity\": " + opacity + "},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[" + points + "]]}}";
+				return "geojson(" + encodeUrl(geojson).replaceAll("\+","%20") + ")";
+			}
+ 			string geocoding.TomTom_Geocoding()
+			{
+				/*******************************************************************************************
+				 *									TOMTOM API Geocoding 
+				 *					https://developer.tomtom.com/search-api/search-api-documentation-geocoding/geocode
+				 */
+				rec = Apartment[ID != 0] range from 14 to 100;
+				counter = 0;
+				for each  r in rec
+				{
+					address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
+					url = "https://api.tomtom.com/search/2/geocode/" + encodeUrl(address) + ".json?limit=1&countrySet=US&view=Unified&key=" + thisapp.tomtom.apikey();
+					response = getUrl(url).toMap();
+					info address;
+					if(response.containKey("summary") && response.get("summary").get("numResults") > 0)
+					{
+						result = response.get("results").toJSONList().get(0);
+						info result.get("type") + " - " + result.get("score");
+						info result.get("address").get("freeformAddress");
+					}
+					else
+					{
+						info response;
+					}
+				}
+				return "Geocoded: " + counter;
+			}
+ 			string tomtom.apikey()
+			{
+				return "";
+			}
+	}
+
+
+
+		workflow
+		{
+		form
+		{
+			View_Visit_Page_on_Load as "View Visit Page - on Load"
+			{
+				type =  form
+				form = Edit_Visit
+				on add
+				{
+					actions 
+					{
+					on load
+					(
+						input.css = "<style>#form_1 {height:auto !important;}#form_1 .zc-pb-formreport-placeholder{min-height:120px; height:120px; overflow:hidden;}</style>";
+										hide Hidden_Section;
+										if(ifnull(input.distance,"") != "")
+										{
+											input.Show_Apartments_Within = input.distance + " miles";
+										}
+										if(ifnull(input.record_id,"") != "")
+										{
+											input.Visit = input.record_id.toLong();
+											vis = Visit[ID == input.Visit];
+											if(vis.count() > 0)
+											{
+												input.Date_field = vis.Date_field;
+												input.Time = vis.Time;
+											}
+										}
+					)
+					}
+				}
+			}
+			View_Visit_Page_distanceC as "View Visit Page - distanceChanged"
+			{
+				type =  form
+				form = Edit_Visit
+				on add
+				{
+					actions 
+					{
+					on user input of Show_Apartments_Within
+					(
+						if(input.distance != null && input.Show_Apartments_Within.getprefix(" ") != input.distance)
+										{
+											if(Widget == null || Widget == "" || Widget == "Static")
+											{
+												openUrl("#Page:View_Visit?record_id=" + input.record_id + "&distance=" + input.Show_Apartments_Within.getprefix(" "),"Same Window");
+											}
+											else
+											{
+												openUrl("#Page:View_Visit_JS?record_id=" + input.record_id + "&distance=" + input.Show_Apartments_Within.getprefix(" "),"Same Window");
+											}
+										}
+					)
+					}
+				}
+			}
+			Apartment_onLoad as "Apartment -onLoad"
+			{
+				type =  form
+				form = Apartment
+				on add or edit
+				{
+					actions 
+					{
+					on load
+					(
+						hide Admin_Section;
+					)
+					}
+				}
+			}
+			Visit_onLoad as "Visit - onLoad"
+			{
+				type =  form
+				form = Visit
+				on add
+				{
+					actions 
+					{
+					on load
+					(
+						hh = zoho.currenttime.toString("HH");
+										mm = rightPad("" + floor(zoho.currenttime.getMinutes() / 10),2).replaceAll(" ","0");
+										input.Time = hh + ":" + mm;
+										input.Date_field = zoho.currentdate.addDay(1);
+					)
+					}
+				}
+			}
+		}
+
+
+		functions
+		{
+			Add_Visit as "Add Visit"
+			{
+				type =  functions
+				form = Apartment
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						nextUrl = "#Report:All_Visits";
+										openUrl("#Form:Visit?Apartment=" + input.ID + "&zc_NextUrl=" + encodeUrl(nextUrl),"Popup Window");
+					)
+					}
+				}
+			}
+			View_Visit as "View Visit"
+			{
+				type =  functions
+				form = Visit
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("https://creatorapp.zoho.com" + zoho.appuri + "#Page:View_Visit?record_id=" + input.ID + "&distance=20","Same Window");
+					)
+					}
+				}
+			}
+			View_Visit_JS as "View Visit JS"
+			{
+				type =  functions
+				form = Visit
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						openUrl("https://creatorapp.zoho.com" + zoho.appuri + "#Page:View_Visit_JS?record_id=" + input.ID + "&distance=20","Same Window");
+					)
+					}
+				}
+			}
+		}
+	}
+	customize
+	{
+		
+		layout = "tab"
+		color = "black"
+		base theme = "professional"
+		new theme = 4
+		new theme color = 1
+		icons = false
+		icons style = outline
+	}
+
+	
+}

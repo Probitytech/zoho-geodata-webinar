@@ -6,9 +6,9 @@ string geocoding.Google_Geocoding()
 	 */
 	rec = Apartment[ID != 0] range from 1 to 30;
 	counter = 0;
-	
 	for each  r in rec
 	{
+		// generate friendly name
 		address = r.Address.address_line_1 + ", " + r.Address.district_city + ", " + r.Address.state_province + ", " + r.Address.postal_Code + ", US";
 		url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeUrl(address) + "&key=" + thisapp.google.apikey();
 		response = getUrl(url);
@@ -23,6 +23,5 @@ string geocoding.Google_Geocoding()
 			}
 		}
 	}
-	
-	return "Geocoded: " + counter ;
+	return "Geocoded: " + counter;
 }
